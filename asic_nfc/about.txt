@@ -1,0 +1,12 @@
+asic_nfc/
+├── rtl/
+│   ├── core/          # Core controller logic
+│   ├── phy/           # Physical layer (ASIC-specific)
+│   └── common/        # Shared utilities
+├── tb/                # Testbenches
+├── constraints/       # Timing constraints
+└── docs/              # Architecture docs
+
+To test scheduler-
+iverilog -g2012 -I ../rtl/core/  -o scheduler_tb.vvp ../rtl/core/nfc_param.vh ../rtl/core/schedule_erase.v ../rtl/core/schedule_prog.v ../rtl/core/schedule_read.v ../rtl/core/fcc_scheduler.v ../tb/scheduler_tb.v
+vidhulapallavor@Mac-664 workdir % vvp scheduler_tb.vvp
