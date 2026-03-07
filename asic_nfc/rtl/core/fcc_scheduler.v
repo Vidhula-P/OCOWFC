@@ -196,7 +196,8 @@ wire [11:0] t_vol_sel;
 wire [11:0] t_odt;
 wire [11:0] t_rd_id;
 
-reg  is_nvddr2;
+reg  is_nvddr2; // flags whether the NAND flash is configured in NVDDR2 mode 
+// (a high-speed interface standard for NAND flash, similar to DDR for DRAM)
 
 always@(posedge clk or posedge rst)    
 if(rst) begin

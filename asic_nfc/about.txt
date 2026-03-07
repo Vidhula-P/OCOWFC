@@ -10,3 +10,11 @@ asic_nfc/
 To test scheduler-
 iverilog -g2012 -I ../rtl/core/  -o scheduler_tb.vvp ../rtl/core/nfc_param.vh ../rtl/core/schedule_erase.v ../rtl/core/schedule_prog.v ../rtl/core/schedule_read.v ../rtl/core/fcc_scheduler.v ../tb/scheduler_tb.v
 vidhulapallavor@Mac-664 workdir % vvp scheduler_tb.vvp
+
+Output for Read Unique ID-
+o_page_cmd: Expected = ed, Actual= ed
+o_page_cmd_id: Expected = 0, Actual= 0
+o_page_addr: Expected = 0, Actual= 0
+o_page_data: Expected = 0, Actual= 0
+o_page_cmd_param: Expected = 408002, Actual= 408002
+o_page_cmd_type: Expected = 2, Actual= 2

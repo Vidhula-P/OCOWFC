@@ -72,16 +72,16 @@ module scheduler_tb;
         i_page_cmd_ready = 1'b1;
         wait (o_cmd_ready); 
         i_cmd_valid = 1'b1;
-        i_cmd = 16'h70;
+        i_cmd = 16'hED; // Read Unique ID
         i_cmd_id = 16'h0;
         i_addr = 40'h0;
         wait (o_page_cmd_valid);
-        $display("o_page_cmd: Expected = %h, Actual= %0h", i_cmd, o_page_cmd);
-        $display("o_page_cmd_id: Expected = %h, Actual= %0h", i_cmd_id, o_page_cmd_id);
-        $display("o_page_addr: Expected = %h, Actual= %0h", i_addr, o_page_addr);
-        $display("o_page_data: Expected = %h, Actual= %0h", 64'h0, o_page_data);
-        $display("o_page_cmd_param: Expected = %h, Actual= %0h", 32'h0, o_page_cmd_param);
-        $display("o_page_cmd_type: Expected = %h, Actual= %0h", 2'h0, o_page_cmd_type);
+        $display("o_page_cmd: Expected = %0h, Actual= %0h", i_cmd, o_page_cmd);
+        $display("o_page_cmd_id: Expected = %0h, Actual= %0h", i_cmd_id, o_page_cmd_id);
+        $display("o_page_addr: Expected = %0h, Actual= %0h", i_addr, o_page_addr);
+        $display("o_page_data: Expected = %0h, Actual= %0h", 64'h0, o_page_data);
+        $display("o_page_cmd_param: Expected = %0h, Actual= %0h", 32'h408002, o_page_cmd_param);
+        $display("o_page_cmd_type: Expected = %0h, Actual= %0h", 2'h2, o_page_cmd_type);// phy_read
         @(posedge clk);
         i_cmd_valid = 1'b0;
         @(posedge clk);
