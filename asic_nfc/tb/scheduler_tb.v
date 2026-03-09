@@ -3,7 +3,7 @@
 module scheduler_tb;
     reg                         clk;
     reg                         rst;
-    reg                         o_cmd_ready;
+    wire                     o_cmd_ready;
     reg                         i_cmd_valid;
     reg [15:0]                  i_cmd;
     reg [15:0]                  i_cmd_id;
@@ -68,7 +68,8 @@ module scheduler_tb;
     initial begin
         #2 rst = 1;
         repeat(5) @(posedge clk) rst = 0;
-        // read operation
+        // read data
+        $display("\nRead Data");
         i_page_cmd_ready = 1'b1;
         wait (o_cmd_ready); 
         i_cmd_valid = 1'b1;
@@ -83,9 +84,53 @@ module scheduler_tb;
         $display("o_page_cmd_param: Expected = %0h, Actual= %0h", 32'h408002, o_page_cmd_param);
         $display("o_page_cmd_type: Expected = %0h, Actual= %0h", 2'h2, o_page_cmd_type);// phy_read
         @(posedge clk);
+        i_page_cmd_ready = 1'b0;
         i_cmd_valid = 1'b0;
-        @(posedge clk);
         repeat(5) @(posedge clk);
+        // // erase data
+        // $display("\nErase Data");
+        // i_page_cmd_ready = 1'b1;
+        // wait (o_cmd_ready); 
+        // i_cmd_valid = 1'b1;
+        // i_cmd = 16'h60;
+        // i_cmd_id = 16'h0;
+        // i_addr = 40'h01;
+        // i_len = 24'h1; // erase 1 block
+        // $display("Waiting for cmd_valid");
+        // wait (o_page_cmd_valid);
+        // $display("o_page_cmd: Expected = %0h, Actual= %0h", i_cmd, o_page_cmd);
+        // $display("o_page_cmd_id: Expected = %0h, Actual= %0h", i_cmd_id, o_page_cmd_id);
+        // $display("o_page_addr: Expected = %0h, Actual= %0h", i_addr, o_page_addr);
+        // $display("o_page_data: Expected = %0h, Actual= %0h", i_data, o_page_data);
+        // $display("o_page_cmd_param: Expected = %0h, Actual= %0h", 32'h800405a2, o_page_cmd_param);
+        // $display("o_page_cmd_type: Expected = %0h, Actual= %0h", 2'h1, o_page_cmd_type);// phy_erase
+        // @(posedge clk);
+        // i_page_cmd_ready = 1'b0;
+        // i_cmd_valid = 1'b0;
+        // repeat(5) @(posedge clk);
+        // // write data
+        // $display("\nWrite Data");
+        // i_page_cmd_ready = 1'b1;
+        // wait (o_cmd_ready); 
+        // i_cmd_valid = 1'b1;
+        // i_cmd = 16'hEF; // Set Configure
+        // i_cmd_id = 16'h0;
+        // i_addr = 40'h01;
+        // i_data = 64'h20; // i_data [7:4] = 4'h2
+        // i_res_valid = 1'b1;
+        // i_res_data = {64{1'b1}};
+        // wait (o_page_cmd_valid & o_res_valid);
+        // $display("o_page_cmd: Expected = %0h, Actual= %0h", i_cmd, o_page_cmd);
+        // $display("o_page_cmd_id: Expected = %0h, Actual= %0h", i_cmd_id, o_page_cmd_id);
+        // $display("o_page_addr: Expected = %0h, Actual= %0h", i_addr, o_page_addr);
+        // $display("o_page_data: Expected = %0h, Actual= %0h", i_data, o_page_data);
+        // $display("o_page_cmd_param: Expected = %0h, Actual= %0h", 32'h800405a2, o_page_cmd_param);
+        // $display("o_page_cmd_type: Expected = %0h, Actual= %0h", 2'h3, o_page_cmd_type);// phy_prog
+        // $display("o_res_data: Expected = %0h, Actual= %0h", i_res_data, o_res_data);
+        // @(posedge clk);
+        // i_page_cmd_ready = 1'b0;
+        // i_cmd_valid = 1'b0;
+        // repeat(5) @(posedge clk);
         $finish;
     end
 
